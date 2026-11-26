@@ -1,5 +1,3 @@
-# PROJECT.md — Progress Tracker
-> ⚠️ **This file is for session continuity.** If tokens run out, open this file first with a new Claude account to understand exactly where the project stands and what to do next.
 
 ---
 
