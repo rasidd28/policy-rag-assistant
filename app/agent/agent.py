@@ -220,7 +220,8 @@ async def process_query(
     # ── 5. Call LLM with guardrails ────────────────────────────────────────────
     answer = ""
     try:
-        client = Groq(api_key=settings.groq_api_key)
+        api_key = (settings.groq_api_key or "").strip().strip('"').strip("'")
+        client = Groq(api_key=api_key)
 
         # Timeout guard via asyncio
         loop = asyncio.get_event_loop()
@@ -250,7 +251,7 @@ async def process_query(
         metrics.finish(success=False, error="timeout")
 
     except Exception as e:
-        logger.error("llm_error", error=str(e), session=session_id)
+        logger.error("llm_error", error=str(e), cause=repr(e.__cause__), session=session_id)
         answer = "I encountered an error processing your request. Please try again."
         metrics.finish(success=False, error=str(e))
 
