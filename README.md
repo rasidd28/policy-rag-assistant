@@ -2,6 +2,10 @@
 
 A production-grade **Retrieval-Augmented Generation (RAG)** system that lets employees ask natural language questions about company policy documents and get cited, accurate answers.
 
+**Live Demo:** https://policy-rag-assistant-rnt7.onrender.com/
+
+![Policy Document Assistant Live Demo](docs/demo_screenshot.png)
+
 ---
 
 ## ⚡ Quick Start
@@ -12,7 +16,7 @@ A production-grade **Retrieval-Augmented Generation (RAG)** system that lets emp
 
 ### 1. Clone & Setup
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/rasidd28/policy-rag-assistant.git
 cd policy-rag-assistant
 cp .env.example .env
 # Edit .env and add your GROQ_API_KEY
@@ -254,3 +258,19 @@ See [`.env.example`](.env.example) for all configuration options.
 | `EMBEDDING_MODEL` | No | `all-MiniLM-L6-v2` | Sentence transformer model |
 | `TOP_K_RESULTS` | No | `5` | Retrieved chunks per query |
 | `MIN_FAITHFULNESS_SCORE` | No | `0.75` | CI eval threshold |
+
+---
+
+## ⚠️ Known Limits
+
+- **In-memory session store:** Conversation history (`_sessions`) is stored in process memory and resets on server restart (single-worker deployment).
+- **Render free-tier cold starts:** Free instances sleep after 15 minutes of inactivity, so the first request may take ~30–50s while the container wakes and loads the ONNX embedding model.
+- **Groq free-tier rate limits:** Bursting >30 requests/minute can trigger `429 Too Many Requests` retries.
+- **Single-document scope:** Currently indexed on `data/pdfs/travel_policy.pdf` (5 chunks including 2 tables); scanned image-only PDFs without OCR are not parsed.
+
+## 🔭 What I'd Do Next
+
+1. **Persistent session & vector storage:** Move session history to Redis/Postgres and ChromaDB to a managed/persistent volume.
+2. **OCR for scanned PDFs:** Add Tesseract or vision-model fallback for image-only policy pages.
+3. **Hybrid search + reranking:** Combine BM25 keyword search with vector similarity and a cross-encoder reranker for higher precision on exact policy codes.
+4. **Streaming responses:** Stream tokens over SSE to improve perceived latency in the chat UI.
