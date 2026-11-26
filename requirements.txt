@@ -2,46 +2,34 @@
 # ==========================================
 
 # PDF Processing
-pdfplumber==0.11.4
-Pillow==10.4.0
+pdfplumber>=0.11.4
+Pillow>=10.4.0
 
-# Embeddings & Vector DB
-sentence-transformers==3.3.1
-chromadb==0.5.23
+# Vector DB & Lightweight ONNX Embeddings
+chromadb>=0.5.23
 
-# LLM Providers
-groq==0.13.0
-openai==1.57.4          # for OpenRouter compat
+# LLM Provider
+groq>=0.13.0
 
-# MCP Server
-fastapi==0.115.6
-uvicorn[standard]==0.32.1
-httpx==0.28.1
-pydantic==2.10.3
-pydantic-settings==2.7.0
-
-# Agent & Conversation
-langchain==0.3.14
-langchain-groq==0.2.3
-langchain-community==0.3.14
-langchain-core==0.3.28
-
-# Evaluation
-ragas==0.2.6
-datasets==3.2.0
+# MCP Server & Web App
+fastapi>=0.115.6
+uvicorn[standard]>=0.32.1
+httpx>=0.28.1
+pydantic>=2.10.3
+pydantic-settings>=2.7.0
 
 # Testing
-pytest==8.3.4
-pytest-asyncio==0.24.0
-pytest-cov==6.0.0
+pytest>=8.3.4
+pytest-asyncio>=0.24.0
+pytest-cov>=6.0.0
 
 # Monitoring & Logging
-structlog==24.4.0
-rich==13.9.4
+structlog>=24.4.0
+rich>=13.9.4
 
 # CI / Linting
-ruff==0.8.4
-black==24.10.0
+ruff>=0.8.4
+black>=24.10.0
 
 # Security / Env
-python-dotenv==1.0.1
+python-dotenv>=1.0.1
